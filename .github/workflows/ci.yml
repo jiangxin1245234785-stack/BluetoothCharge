@@ -1,0 +1,64 @@
+name: Windows build and packages
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows:
+    runs-on: windows-2025
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+      DOTNET_NOLOGO: '1'
+      # Isolate the pinned SDK from newer versions preinstalled on the runner.
+      DOTNET_INSTALL_DIR: ${{ runner.temp }}/bluetoothcharge-dotnet
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Read pinned SDK version
+        id: sdk
+        run: |
+          $sdk = (Get-Content -LiteralPath global.json -Raw | ConvertFrom-Json).sdk.version
+          if ($sdk -notmatch '^\d+\.\d+\.\d+$') { throw 'global.json must pin a stable SDK version.' }
+          "version=$sdk" >> $env:GITHUB_OUTPUT
+
+      - name: Install .NET SDK
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          # Passing the exact version avoids translating latestFeature into 10.0.x.
+          dotnet-version: ${{ steps.sdk.outputs.version }}
+
+      - name: Run Release checks and package both x64 editions
+        run: |
+          dotnet --info
+          if ($LASTEXITCODE -ne 0) { throw 'The .NET SDK is unavailable.' }
+          ./scripts/package-release.ps1 -Dotnet dotnet
+
+      - name: Upload packages and SHA-256 checksums
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: BluetoothCharge-win-x64-${{ github.run_number }}
+          path: |
+            artifacts/*.zip
+            artifacts/SHA256SUMS.txt
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14

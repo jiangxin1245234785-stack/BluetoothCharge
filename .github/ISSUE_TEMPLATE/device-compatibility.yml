@@ -1,0 +1,80 @@
+name: "Device compatibility / 设备兼容性"
+description: "Report a missing device, battery/connection issue, or a verified model. / 提交设备、电量或连接兼容性记录。"
+title: "[Compatibility] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        中文或英文均可。Please distinguish a missing device from a listed device with unknown battery.
+        This is a public report. Redact personal device names, Bluetooth/MAC addresses, ContainerIds, serial numbers and local user paths before sharing diagnostics. Do not upload the entire data folder.
+  - type: input
+    id: app-version
+    attributes:
+      label: "App version and package / 程序版本与包类型"
+      placeholder: "Example: v0.1.3, win-x64 self-contained / light / source build"
+    validations:
+      required: true
+  - type: input
+    id: windows-version
+    attributes:
+      label: "Windows version and build / Windows 版本与内部版本号"
+      description: "Use winver. Please omit computer/user names. / 可从 winver 查看，请勿填写电脑名或用户名。"
+    validations:
+      required: true
+  - type: input
+    id: device-model
+    attributes:
+      label: "Device brand/model and firmware / 设备品牌、型号与固件"
+      description: "Use the product model, not its personal Bluetooth name. Firmware is optional. / 填产品型号，不要填写个人化蓝牙名称；固件可选。"
+    validations:
+      required: true
+  - type: dropdown
+    id: connection
+    attributes:
+      label: "Connection method / 连接方式"
+      options:
+        - "Bluetooth LE / 蓝牙 BLE"
+        - "Bluetooth Classic / 经典蓝牙"
+        - "Bluetooth, type unknown / 蓝牙类型未知"
+        - "USB wireless receiver / USB 无线接收器"
+        - "Wired USB / 有线 USB"
+        - "Not sure / 不确定"
+    validations:
+      required: true
+  - type: input
+    id: usb-id
+    attributes:
+      label: "USB VID:PID, if relevant / 仅 USB VID:PID（可选）"
+      description: "For example 046D:C54D. Do not paste a full USB/HID instance path or serial number. / 勿粘贴完整实例路径或序列号。"
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: "Observed outcome / 实际结果"
+      options:
+        - "Device is missing / 完全没有设备行"
+        - "Device is listed, battery unknown / 已列出但电量未知"
+        - "Battery appears incorrect or stale / 电量不正确或过时"
+        - "Connection state is incorrect / 连接状态不正确"
+        - "Works with this model / 此型号工作正常"
+    validations:
+      required: true
+  - type: textarea
+    id: comparison
+    attributes:
+      label: "Windows/vendor comparison and reproduction / 系统、厂商应用表现与复现"
+      description: "Does Windows show paired/connected and a battery value? Can the vendor app read it? State the app source/detail, steps tried and expected result. / 说明 Windows 配对、连接及电量显示，厂商应用是否可读，本工具来源/详情、操作步骤与预期。"
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: "Sanitized diagnostics or error / 已脱敏的诊断或错误（可选）"
+      description: "Include only relevant, redacted fields. A full raw export is not required. / 只附必要字段，无需完整原始导出。"
+      render: text
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: "Privacy check / 隐私检查"
+      options:
+        - label: "Any shared logs, diagnostics or screenshots have been checked for personal names, addresses, IDs, serial numbers and local paths. / 分享内容已检查并去除个人标识。"
+          required: true

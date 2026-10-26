@@ -1,0 +1,29 @@
+# Build output
+**/bin/
+**/obj/
+dist/
+artifacts/
+work/
+.vs/
+*.user
+*.suo
+
+# Local configuration, device identities, and diagnostic captures
+.env
+.env.*
+config.json
+state.json
+*.invalid-*
+*.log
+*.log.*
+diagnostics.json
+*-diagnostics.json
+smoke-test.json
+settings-preview.png
+preview.png
+HANDOFF.md
+
+# OS metadata
+Thumbs.db
+Desktop.ini
+.DS_Store

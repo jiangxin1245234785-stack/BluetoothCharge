@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <WindowsSdkPackageVersion>10.0.19041.57</WindowsSdkPackageVersion>
+    <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/BluetoothCharge/Domain.cs" Link="Domain.cs" />
+    <Compile Include="../../src/BluetoothCharge/DeviceScanner.cs" Link="DeviceScanner.cs" />
+    <Compile Include="../../src/BluetoothCharge/LogitechHidBattery.cs" Link="LogitechHidBattery.cs" />
+    <Compile Include="../../src/BluetoothCharge/SettingsForm.cs" Link="SettingsForm.cs" />
+    <Compile Include="../../src/BluetoothCharge/StartupManager.cs" Link="StartupManager.cs" />
+    <Compile Include="../../src/BluetoothCharge/TraySummary.cs" Link="TraySummary.cs" />
+    <Compile Include="../../src/BluetoothCharge/TrayHover.cs" Link="TrayHover.cs" />
+  </ItemGroup>
+</Project>

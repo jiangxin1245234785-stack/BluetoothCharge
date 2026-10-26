@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>BluetoothCharge</AssemblyName>
+    <Version>0.1.3</Version>
+    <ApplicationIcon>Assets\application.ico</ApplicationIcon>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <PublishTrimmed>false</PublishTrimmed>
+    <WindowsSdkPackageVersion>10.0.19041.57</WindowsSdkPackageVersion>
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.WinUI.Notifications" Version="7.1.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\tray-on-light.ico" LogicalName="BluetoothCharge.Assets.TrayOnLight.ico" />
+    <EmbeddedResource Include="Assets\tray-on-dark.ico" LogicalName="BluetoothCharge.Assets.TrayOnDark.ico" />
+    <EmbeddedResource Include="Assets\application.ico" LogicalName="BluetoothCharge.Assets.Application.ico" />
+  </ItemGroup>
+</Project>
