@@ -23,7 +23,7 @@ $env:DOTNET_NOLOGO = '1'
 
 $repository = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $outputRoot = [IO.Path]::GetFullPath($OutputDirectory)
-$dotnetExe = (Get-Command $Dotnet -CommandType Application -ErrorAction Stop).Source
+$dotnetExe = (Get-Command $Dotnet -CommandType Application -ErrorAction Stop | Select-Object -First 1).Source
 $project = Join-Path $repository 'src\BluetoothCharge\BluetoothCharge.csproj'
 $tests = Join-Path $repository 'tests\BluetoothCharge.Tests\BluetoothCharge.Tests.csproj'
 $files = @('README.md', 'README.en.md', 'CHANGELOG.md', 'THIRD-PARTY-NOTICES.md', 'LICENSE')

@@ -4,6 +4,8 @@
 
 A Windows tray application that shows battery levels for confirmed connected wireless devices and reminds you when they fall below a chosen threshold. It uses battery information reported by Windows, standard BLE Battery Service, and a narrowly scoped Logitech USB wireless mouse adapter.
 
+The application UI is currently in Simplified Chinese; this English guide covers setup and behavior.
+
 **A working connection does not guarantee an available battery percentage.** Missing data stays unknown; the app does not estimate percentages or turn unknown values into 0%.
 
 ![Anonymous synthetic example of the tray icon and hover list](docs/images/tray-preview.png)
